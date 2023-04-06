@@ -67,19 +67,30 @@ public class App {
     }
 
 	public static void main(String[] args){
-        // NOTE: tee splits one src to multiple sinks
-        String capPl = openPipeline(0, 800, 600, 30) + " ! tee name=t " + 
+        String cap0Pl = openPipeline(0, 800, 600, 30) + " ! tee name=t " + 
             "t. ! queue ! jpegdec ! videoconvert ! " + h264encPipeline(2048000) + " ! rtspclientsink location=rtsp://127.0.0.1:8554/cam0 " +
             "t. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/cam0jpeg " +
             "t. ! queue ! jpegdec ! videoconvert ! appsink ";
         
-        System.out.println(capPl);
+        String cap1Pl = openPipeline(1, 800, 600, 30) + " ! tee name=t " + 
+            "t. ! queue ! jpegdec ! videoconvert ! " + h264encPipeline(2048000) + " ! rtspclientsink location=rtsp://127.0.0.1:8554/cam0 " +
+            "t. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/cam0jpeg " +
+            "t. ! queue ! jpegdec ! videoconvert ! appsink ";
+        
+        System.out.println(cap0Pl);
+        System.out.println(cap1Pl);
 
-        VideoCapture cap = new VideoCapture(capPl, Videoio.CAP_GSTREAMER);
-        Mat frame = new Mat();
+        VideoCapture cap0 = new VideoCapture(cap0Pl, Videoio.CAP_GSTREAMER);
+        VideoCapture cap1 = new VideoCapture(cap1Pl, Videoio.CAP_GSTREAMER);
+
+        Mat frame0 = new Mat();
+        Mat frame1 = new Mat();
         while(true) {
-            if (cap.read(frame)) {
-                Imgcodecs.imwrite("test.jpeg", frame);
+            if (cap0.read(frame0)) {
+                
+            }
+            if(cap1.read(frame1)){
+                
             }
         }
     }
