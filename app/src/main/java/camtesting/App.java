@@ -73,8 +73,8 @@ public class App {
             "t. ! queue ! jpegdec ! videoconvert ! appsink ";
         
         String cap1Pl = openPipeline(1, 800, 600, 30) + " ! tee name=t " + 
-            "t. ! queue ! jpegdec ! videoconvert ! " + h264encPipeline(2048000) + " ! rtspclientsink location=rtsp://127.0.0.1:8554/cam0 " +
-            "t. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/cam0jpeg " +
+            "t. ! queue ! jpegdec ! videoconvert ! " + h264encPipeline(2048000) + " ! rtspclientsink location=rtsp://127.0.0.1:8554/cam1 " +
+            "t. ! queue ! rtspclientsink location=rtsp://127.0.0.1:8554/cam1jpeg " +
             "t. ! queue ! jpegdec ! videoconvert ! appsink ";
         
         System.out.println(cap0Pl);
