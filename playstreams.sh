@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
-mpv --title=Cam0 --no-cache --untimed --profile=low-latency --no-correct-pts --fps=60 --osc=no rtsp://192.168.2.5:8554/cam0 &
-mpv --title=Cam1 --no-cache --untimed --profile=low-latency --no-correct-pts --fps=60 --osc=no rtsp://192.168.2.5:8554/cam1
+mpv rtsp://192.168.2.5:8554/front.mp4 --title=Front --no-cache --untimed  --no-demuxer-thread --vd-lavc-threads=1 --profile=low-latency --no-correct-pts --osc=no &
+mpv rtsp://192.168.2.5:8554/bottom.mp4 --title=Bottom --no-cache --untimed  --no-demuxer-thread --vd-lavc-threads=1 --profile=low-latency --no-correct-pts --osc=no
